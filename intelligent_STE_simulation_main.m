@@ -196,6 +196,8 @@ for i = 1:100
                 % Entropy
                 % infoGain = infoGain - (-sum(zWpnorm.*log2(zWpnorm+(zWpnorm==0))));
 
+                % Dual control reward
+
             
             end
         end
