@@ -47,8 +47,8 @@ ess = ESS(wnew);
 
 
 % ===================== Resampling ========================================
-% Resampling with MCMC step is based on Branko's book
-% see Chapte 3 in Beyond the Kalman Filter
+% Resampling with MCMC step is based on Branko Ristic's book
+% see Ch3 in Beyond the Kalman Filter: Partcile Filters for Target Tracking
 
 if ess < 0.5*N
 
@@ -83,7 +83,7 @@ if ess < 0.5*N
     idx = true(1,N);
     newState = State;
 
-    for jj = 1:4
+    for jj = 1:3
         % newState(:,idx) = State(:,idx) + hopt*D*randn(n,sum(idx));
 
         newState(1:3,idx) = State(1:3,idx) + hopt*Dpos*randn(3,sum(idx));

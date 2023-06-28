@@ -10,8 +10,8 @@ conc = plumeModel(xpart, pos);
 % m.sigma - Standard deviation of sensor noise 
 sigma0 = m.thresh; % or m.sig
 
-sigmaN = m.sig_pct*conc*1.2+m.sig; 
-sigma0 = sigmaN;
+sigmaN = m.sig_pct*conc+m.sig; 
+% sigma0 = sigmaN;
 
 if yObv <= m.thresh
     likelihood = m.Pd*1/2*(1 + erf((m.thresh-conc)./sigma0/sqrt(2))) + (1-m.Pd); 

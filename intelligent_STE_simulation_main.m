@@ -40,15 +40,15 @@ m.Pd = 0.7; % probability of detection
 m.sig = 1e-4; % minimun sensor noise
 m.sig_pct = 0.5; % the standard deviation is a percentage of the concentration level
 
-% process model parameters (not used)
+% process noise parameters (not used)
 sigma.x = 0.2;
 sigma.y = 0.2;
-sigma.z = 0.05;
-sigma.Q = 0.1;
-sigma.u = 0.1;
+sigma.z = 0.1;
+sigma.Q = 0.2;
+sigma.u = 0.2;
 sigma.phi = 2*pi/180;
-sigma.ci = 0.05;
-sigma.cii = 0.05;
+sigma.ci = 0.1;
+sigma.cii = 0.5;
 
 
 % Initialisation and parameters of the mobile sensor
@@ -133,9 +133,9 @@ for i = 1:100
     Yneighbour = zeros(1,size(ynew,2));
     Zneighbour = zeros(1,size(znew,2));
 
-    tic
     
-    Nz= 20; % down sample the source term particles (theta_i, i=1,...N) from N to Nz for generating the hypothetical measurements
+    
+    Nz= 25; % down sample the source term particles (theta_i, i=1,...N) from N to Nz for generating the hypothetical measurements
     MM = 1; % the number of hypothetical measurements for each source term particle due to measurement noise
     
     % down sample the source term particles
@@ -188,18 +188,23 @@ for i = 1:100
                 WW(isinf(WW))=1;
                 WW(isnan(WW))=1;
                 
-                % caculate information gain 
+                % Caculate the information gain 
                 % comment/uncomment to choose one of those information gains
                 % Note: here we used the sum rather than the averaged value
 
+                % ---------------------------------------------------------
                 % KLD
                 infoGain = infoGain + (sum(zWpnorm.*log(WW)));
-
+                %----------------------------------------------------------
+                
+                %----------------------------------------------------------
                 % Entropy
                 % infoGain = infoGain - (-sum(zWpnorm.*log2(zWpnorm+(zWpnorm==0))));
+                %----------------------------------------------------------
 
+                %----------------------------------------------------------
                 % Dual control reward
-
+                % 
                 % [~, indx] = resamplingIndex(zWpnorm,round(N/5)); % downsample for quick calculation 
                 % posPlus = [theta.x(indx), theta.y(indx)]';
                 % posPlus_avg = mean(posPlus,2);
@@ -209,9 +214,7 @@ for i = 1:100
                 % err_y = posPlus_avg(2)-npos.y_matrix; 
                 % 
                 % infoGain = infoGain - ((err_x^2+err_y^2) + trace(covPlus));
-
-
-            
+                %----------------------------------------------------------
             end
         end
 
