@@ -135,8 +135,8 @@ for i = 1:100
 
     tic
     
-    Nz= 25; % down sample the source term particles (theta_i, i=1,...N) from N to Nz for generating the hypothetical measurements
-    MM = 2; % the number of hypothetical measurements for each source term particle due to measurement noise
+    Nz= 20; % down sample the source term particles (theta_i, i=1,...N) from N to Nz for generating the hypothetical measurements
+    MM = 1; % the number of hypothetical measurements for each source term particle due to measurement noise
     
     % down sample the source term particles
     [~, indx_z]= resamplingIndex(Wpnorm,Nz);
@@ -188,7 +188,9 @@ for i = 1:100
                 WW(isinf(WW))=1;
                 WW(isnan(WW))=1;
                 
-                % caculate information gain
+                % caculate information gain 
+                % comment/uncomment to choose one of those information gains
+                % Note: here we used the sum rather than the averaged value
 
                 % KLD
                 infoGain = infoGain + (sum(zWpnorm.*log(WW)));
@@ -197,6 +199,17 @@ for i = 1:100
                 % infoGain = infoGain - (-sum(zWpnorm.*log2(zWpnorm+(zWpnorm==0))));
 
                 % Dual control reward
+
+                % [~, indx] = resamplingIndex(zWpnorm,round(N/5)); % downsample for quick calculation 
+                % posPlus = [theta.x(indx), theta.y(indx)]';
+                % posPlus_avg = mean(posPlus,2);
+                % covPlus = cov(posPlus');
+                % 
+                % err_x = posPlus_avg(1)-npos.x_matrix;
+                % err_y = posPlus_avg(2)-npos.y_matrix; 
+                % 
+                % infoGain = infoGain - ((err_x^2+err_y^2) + trace(covPlus));
+
 
             
             end

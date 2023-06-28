@@ -148,7 +148,6 @@ time = toc(ct); % overall calculation time;
 
 % ============= Outputs ==================================================
 
-% xest = sum(newpart.*(ones(n,1)*wnew), 2);
 xest = [];
 info.ess = ess;
 info.avgSampling = 0;
