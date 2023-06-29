@@ -14,4 +14,4 @@ More details regarding the underlying algorithms can be found in the following r
 * Chen*, Wen-Hua, Callum Rhodes, and Cunjia Liu. "Dual control for exploitation and exploration (DCEE) in autonomous search." Automatica 133 (2021): 109851.
  
 > **Note**
-> This example code aims to to help people get familar with the working pricinples of informatin theoretic planning in the context of source team estimation. It  does not serve to document the code used in these papers.   
+> This example code aims to to help people get familar with the working pricinples of informatin theoretic planning in the context of source term estimation. It  does not serve to document the code used in these papers.   
