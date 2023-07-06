@@ -236,8 +236,9 @@ for i = 1:100
    
 
 
-    % stop criteria
-    Covar = cov(theta.x,theta.y);
+    % stop criteria 
+    [~, indx] = resamplingIndex(Wpnorm);
+    Covar = cov(theta.x(indx),theta.y(indx));
     Spread = sqrt(trace(Covar));
     
     if Spread<5 % 3.5? 4?
